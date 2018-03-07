@@ -55,7 +55,7 @@ class AlertTabs extends Component {
         type: 'error',
         icon: 'alert-triangle',
         duration: 10000,
-        text: 'There was an error getting the Kapacitor config',
+        message: 'There was an error getting the Kapacitor config',
       })
     }
   }
@@ -90,7 +90,7 @@ class AlertTabs extends Component {
           type: 'success',
           icon: 'checkmark',
           duration: 5000,
-          text: `Alert configuration for ${section} successfully saved.`,
+          message: `Alert configuration for ${section} successfully saved.`,
         })
         return true
       } catch ({data: {error}}) {
@@ -99,7 +99,7 @@ class AlertTabs extends Component {
           type: 'error',
           icon: 'alert-triangle',
           duration: 10000,
-          text: `There was an error saving the alert configuration for ${section}: ${errorMsg}`,
+          message: `There was an error saving the alert configuration for ${section}: ${errorMsg}`,
         })
         return false
       }
@@ -116,14 +116,14 @@ class AlertTabs extends Component {
           type: 'success',
           icon: 'checkmark',
           duration: 5000,
-          text: `Successfully triggered an alert to ${section}. If the alert does not reach its destination, please check your configuration settings.`,
+          message: `Successfully triggered an alert to ${section}. If the alert does not reach its destination, please check your configuration settings.`,
         })
       } else {
         this.props.publishNotification({
           type: 'error',
           icon: 'alert-triangle',
           duration: 10000,
-          text: `There was an error sending an alert to ${section}: ${data.message}`,
+          message: `There was an error sending an alert to ${section}: ${data.message}`,
         })
       }
     } catch (error) {
@@ -131,7 +131,7 @@ class AlertTabs extends Component {
         type: 'error',
         icon: 'alert-triangle',
         duration: 10000,
-        text: `There was an error sending an alert to ${section}.`,
+        message: `There was an error sending an alert to ${section}.`,
       })
     }
   }
