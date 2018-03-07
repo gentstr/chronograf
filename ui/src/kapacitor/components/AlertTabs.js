@@ -52,7 +52,7 @@ class AlertTabs extends Component {
     } catch (error) {
       this.setState({configSections: null})
       this.props.publishNotification({
-        type: 'danger',
+        type: 'error',
         icon: 'alert-triangle',
         duration: 10000,
         text: 'There was an error getting the Kapacitor config',
@@ -96,7 +96,7 @@ class AlertTabs extends Component {
       } catch ({data: {error}}) {
         const errorMsg = _.join(_.drop(_.split(error, ': '), 2), ': ')
         this.props.publishNotification({
-          type: 'danger',
+          type: 'error',
           icon: 'alert-triangle',
           duration: 10000,
           text: `There was an error saving the alert configuration for ${section}: ${errorMsg}`,
@@ -120,7 +120,7 @@ class AlertTabs extends Component {
         })
       } else {
         this.props.publishNotification({
-          type: 'danger',
+          type: 'error',
           icon: 'alert-triangle',
           duration: 10000,
           text: `There was an error sending an alert to ${section}: ${data.message}`,
@@ -128,7 +128,7 @@ class AlertTabs extends Component {
       }
     } catch (error) {
       this.props.publishNotification({
-        type: 'danger',
+        type: 'error',
         icon: 'alert-triangle',
         duration: 10000,
         text: `There was an error sending an alert to ${section}.`,

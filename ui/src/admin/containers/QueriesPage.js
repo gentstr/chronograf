@@ -43,7 +43,7 @@ class QueriesPage extends Component {
       if (errors.length) {
         errors.forEach(message =>
           publishNotification({
-            type: 'danger',
+            type: 'error',
             icon: 'alert-triangle',
             duration: 10000,
             message,
@@ -61,7 +61,7 @@ class QueriesPage extends Component {
           if (result.errors.length) {
             result.errors.forEach(message =>
               publishNotification({
-                type: 'danger',
+                type: 'error',
                 icon: 'alert-triangle',
                 duration: 10000,
                 message,

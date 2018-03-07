@@ -85,7 +85,7 @@ class CheckSources extends Component {
 
     if (!isFetching && isUsingAuth && !organizations.length) {
       publishNotification({
-        type: 'danger',
+        type: 'error',
         icon: 'alert-triangle',
         duration: 10000,
         message:
@@ -99,7 +99,7 @@ class CheckSources extends Component {
       !organizations.find(o => o.id === currentOrganization.id)
     ) {
       publishNotification({
-        type: 'danger',
+        type: 'error',
         icon: 'alert-triangle',
         duration: 10000,
         message: 'You were removed from your current organization',
@@ -126,7 +126,7 @@ class CheckSources extends Component {
         }
         // if you're a viewer and there are no sources, go to purgatory.
         publishNotification({
-          type: 'danger',
+          type: 'error',
           icon: 'alert-triangle',
           duration: 10000,
           message: 'Organization has no sources configured',

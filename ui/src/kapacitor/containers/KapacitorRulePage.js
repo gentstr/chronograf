@@ -33,7 +33,7 @@ class KapacitorRulePage extends Component {
     const kapacitor = await getActiveKapacitor(this.props.source)
     if (!kapacitor) {
       return publishNotification({
-        type: 'danger',
+        type: 'error',
         icon: 'alert-triangle',
         duration: 10000,
         text: "We couldn't find a configured Kapacitor for this source", // eslint-disable-line quotes
@@ -46,7 +46,7 @@ class KapacitorRulePage extends Component {
       this.setState({kapacitor, handlersFromConfig})
     } catch (error) {
       publishNotification({
-        type: 'danger',
+        type: 'error',
         icon: 'alert-triangle',
         duration: 10000,
         text: 'There was a problem communicating with Kapacitor',

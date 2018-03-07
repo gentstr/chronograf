@@ -35,7 +35,7 @@ class DatabaseManagerPage extends Component {
     const {actions, publishNotification, source, databases} = this.props
     if (!database.name) {
       return publishNotification({
-        type: 'danger',
+        type: 'error',
         icon: 'alert-triangle',
         duration: 10000,
         message: 'Database name cannot be blank',
@@ -44,7 +44,7 @@ class DatabaseManagerPage extends Component {
 
     if (_.findIndex(databases, {name: database.name}, 1) !== -1) {
       return publishNotification({
-        type: 'danger',
+        type: 'error',
         icon: 'alert-triangle',
         duration: 10000,
         message: 'A database by this name already exists',
@@ -70,7 +70,7 @@ class DatabaseManagerPage extends Component {
     if (key === 'Enter') {
       if (!database.name) {
         return publishNotification({
-          type: 'danger',
+          type: 'error',
           icon: 'alert-triangle',
           duration: 10000,
           message: 'Database name cannot be blank',
@@ -79,7 +79,7 @@ class DatabaseManagerPage extends Component {
 
       if (_.findIndex(databases, {name: database.name}, 1) !== -1) {
         return publishNotification({
-          type: 'danger',
+          type: 'error',
           icon: 'alert-triangle',
           duration: 10000,
           message: 'A database by this name already exists',
@@ -101,7 +101,7 @@ class DatabaseManagerPage extends Component {
     if (key === 'Enter') {
       if (database.deleteCode !== `DELETE ${database.name}`) {
         return publishNotification({
-          type: 'danger',
+          type: 'error',
           icon: 'alert-triangle',
           duration: 10000,
           message: `Please type DELETE ${database.name} to confirm`,
