@@ -14,6 +14,8 @@ import FancyScrollbar from 'shared/components/FancyScrollbar'
 import SourceIndicator from 'shared/components/SourceIndicator'
 import InfluxTable from 'src/sources/components/InfluxTable'
 
+import {sourceNotifications} from 'shared/copy/notificationsCopy'
+
 const V_NUMBER = VERSION // eslint-disable-line no-undef
 
 class ManageSources extends Component {
@@ -40,19 +42,9 @@ class ManageSources extends Component {
 
     try {
       this.props.removeAndLoadSources(source)
-      publishNotification({
-        type: 'success',
-        icon: 'checkmark',
-        duration: 5000,
-        message: `Deleted source ${source.name}`,
-      })
+      publishNotification(sourceNotifications.deleteSuccess(source.name))
     } catch (e) {
-      publishNotification({
-        type: 'error',
-        icon: 'alert-triangle',
-        duration: 10000,
-        message: 'Could not remove source from Chronograf',
-      })
+      publishNotification(sourceNotifications.deleteFail(source.name))
     }
   }
 

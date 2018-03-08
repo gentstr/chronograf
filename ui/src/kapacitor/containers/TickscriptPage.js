@@ -10,6 +10,8 @@ import {getActiveKapacitor} from 'src/shared/apis'
 import {getLogStreamByRuleID, pingKapacitorVersion} from 'src/kapacitor/apis'
 import {publishNotification as publishNotificationAction} from 'shared/actions/notifications'
 
+import {tickscriptNotifications} from 'shared/copy/notificationsCopy'
+
 class TickscriptPage extends Component {
   constructor(props) {
     super(props)
@@ -43,12 +45,7 @@ class TickscriptPage extends Component {
         this.setState({
           areLogsEnabled: false,
         })
-        publishNotification({
-          type: 'warning',
-          icon: 'alert-triangle',
-          duration: 10000,
-          message: 'Could not use logging, requires Kapacitor version 1.4',
-        })
+        publishNotification(tickscriptNotifications.loggingUnavailable)
         return
       }
 
@@ -117,12 +114,7 @@ class TickscriptPage extends Component {
       }
     } catch (error) {
       console.error(error)
-      publishNotification({
-        type: 'error',
-        icon: 'alert-triangle',
-        duration: 10000,
-        message: error,
-      })
+      publishNotification(tickscriptNotifications.loggingError(error))
       throw error
     }
   }
@@ -137,9 +129,7 @@ class TickscriptPage extends Component {
 
     const kapacitor = await getActiveKapacitor(source)
     if (!kapacitor) {
-      errorActions.errorThrown(
-        'We could not find a configured Kapacitor for this source'
-      )
+      errorActions.errorThrown(tickscriptNotifications.notFound)
     }
 
     if (this._isEditing()) {

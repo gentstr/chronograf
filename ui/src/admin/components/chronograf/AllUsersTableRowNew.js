@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux'
 import {publishNotification as publishNotificationAction} from 'shared/actions/notifications'
 import Dropdown from 'shared/components/Dropdown'
 
+import {chronografUserNotifications} from 'shared/copy/notificationsCopy'
 import {ALL_USERS_TABLE} from 'src/admin/constants/chronografTableSizing'
 const {
   colOrganizations,
@@ -81,12 +82,9 @@ class AllUsersTableRowNew extends Component {
 
     if (e.key === 'Enter') {
       if (preventCreate) {
-        return this.props.publishNotification({
-          type: 'warning',
-          icon: 'alert-triangle',
-          duration: 5000,
-          message: 'User must have a name and provider',
-        })
+        return this.props.publishNotification(
+          chronografUserNotifications.addUserValidation
+        )
       }
       this.handleConfirmCreateUser()
     }

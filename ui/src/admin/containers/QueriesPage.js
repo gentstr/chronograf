@@ -11,6 +11,8 @@ import QueriesTable from 'src/admin/components/QueriesTable'
 import showDatabasesParser from 'shared/parsing/showDatabases'
 import showQueriesParser from 'shared/parsing/showQueries'
 import {TIMES} from 'src/admin/constants'
+import {influxAdminNotifications} from 'shared/copy/notificationsCopy'
+
 import {
   loadQueries as loadQueriesAction,
   setQueryToKill as setQueryToKillAction,
@@ -42,12 +44,7 @@ class QueriesPage extends Component {
       const {databases, errors} = showDatabasesParser(resp.data)
       if (errors.length) {
         errors.forEach(message =>
-          publishNotification({
-            type: 'error',
-            icon: 'alert-triangle',
-            duration: 10000,
-            message,
-          })
+          publishNotification(influxAdminNotifications.queryError(message))
         )
         return
       }
@@ -60,12 +57,7 @@ class QueriesPage extends Component {
           const result = showQueriesParser(queryResponse.data)
           if (result.errors.length) {
             result.errors.forEach(message =>
-              publishNotification({
-                type: 'error',
-                icon: 'alert-triangle',
-                duration: 10000,
-                message,
-              })
+              publishNotification(influxAdminNotifications.queryError(message))
             )
           }
 

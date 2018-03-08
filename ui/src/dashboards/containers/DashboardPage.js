@@ -33,6 +33,7 @@ import {
 } from 'shared/actions/app'
 import {presentationButtonDispatcher} from 'shared/dispatchers'
 import {DASHBOARD_LAYOUT_ROW_HEIGHT} from 'shared/constants'
+import {dashboardNotifications} from 'shared/copy/notificationsCopy'
 
 const FORMAT_INFLUXQL = 'influxql'
 const defaultTimeRange = {
@@ -88,12 +89,7 @@ class DashboardPage extends Component {
 
     if (!dashboard) {
       router.push(`/sources/${source.id}/dashboards`)
-      return publishNotification({
-        type: 'error',
-        icon: 'alert-triangle',
-        duration: 10000,
-        message: `Dashboard ${dashboardID} could not be found`,
-      })
+      return publishNotification(dashboardNotifications.notFound(dashboardID))
     }
 
     // Refresh and persists influxql generated template variable values.
