@@ -15,6 +15,11 @@ const {
   colActions,
 } = ALL_USERS_TABLE
 
+import {
+  userAddedToOrgMessage,
+  userRemovedFromOrgMessage,
+} from 'shared/copy/notificationsCopy'
+
 class AllUsersTable extends Component {
   constructor(props) {
     super(props)
@@ -46,7 +51,7 @@ class AllUsersTable extends Component {
     this.props.onUpdateUserRoles(
       user,
       newRoles,
-      `${user.name} has been added to ${organization.name}`
+      userAddedToOrgMessage(user.name, organization.name)
     )
   }
 
@@ -60,7 +65,7 @@ class AllUsersTable extends Component {
     this.props.onUpdateUserRoles(
       user,
       newRoles,
-      `${user.name} has been removed from ${name}`
+      userRemovedFromOrgMessage(user.name, name)
     )
   }
 
